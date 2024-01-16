@@ -2,7 +2,7 @@
 This repo is for the logic app to create a Teams from a Forms
 
 # Deploy to Azure
-https://portal.azure.com/#create/Microsoft.Template/uri/
+![Deploy to Azure](https://aka.ms/deploytoazurebutton)
 
 # Requirements
 
