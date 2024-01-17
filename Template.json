@@ -2,26 +2,42 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "logicAppName": {
+        "workflows_la_createteamsfromforms_name": {
+            "defaultValue": "la-createteamsfromforms",
             "type": "String"
         },
-        "location": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "[resourceGroup().location]",
-            "metadata": {
-               "description": "The resource location for the logic app"
-            }
+        "connections_microsoftforms_1_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/microsoftforms-1",
+            "type": "String"
+        },
+        "connections_office365_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/office365",
+            "type": "String"
+        },
+        "connections_sharepointonline_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/sharepointonline",
+            "type": "String"
+        },
+        "connections_teams_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/teams",
+            "type": "String"
         }
     },
     "variables": {},
     "resources": [
         {
             "type": "Microsoft.Logic/workflows",
-            "apiVersion": "2019-05-01",
-            "name": "[parameters('logicAppName')]",
-            "location": "[parameters('location')]",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_la_createteamsfromforms_name')]",
+            "location": "switzerlandnorth",
+            "tags": {
+                "Cost Center": "1000123123"
+            },
+            "identity": {
+                "type": "SystemAssigned"
+            },
             "properties": {
+                "state": "Enabled",
                 "definition": {
                     "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
                     "contentVersion": "1.0.0.0",
@@ -307,7 +323,7 @@
                                                     },
                                                     "type": "Http",
                                                     "inputs": {
-                                                        "body": "grant_type=password&resource=https://graph.microsoft.com&client_id=11cf9fdc-af79-486b-b982-8fb4091a23c8&username=serviceaccount@crayon101.onmicrosoft.com&password=PASSWORD&client_secret=CLIENTSECRET-cb.u",
+                                                        "body": "grant_type=password&resource=https://graph.microsoft.com&client_id=11cf9fdc-af79-486b-b982-8fb4091a23c8&username=serviceaccount@crayon101.onmicrosoft.com&password=PASSWORD&client_secret=SECRET-cb.u",
                                                         "headers": {
                                                             "Content-Type": "application/x-www-form-urlencoded"
                                                         },
@@ -730,7 +746,7 @@
                                                     },
                                                     "type": "Http",
                                                     "inputs": {
-                                                        "body": "grant_type=password&resource=https://graph.microsoft.com&client_id=11cf9fdc-af79-486b-b982-8fb4091a23c8&username=serviceaccount@crayon101.onmicrosoft.com&password=SECRET&client_secret=SECRET-cb.u",
+                                                        "body": "grant_type=password&resource=https://graph.microsoft.com&client_id=11cf9fdc-af79-486b-b982-8fb4091a23c8&username=serviceaccount@crayon101.onmicrosoft.com&password=PASSWORD&client_secret=SECRET-cb.u",
                                                         "headers": {
                                                             "Content-Type": "application/x-www-form-urlencoded"
                                                         },
@@ -1024,7 +1040,7 @@
                                         }
                                     }
                                 },
-                                "Case_3_External_Collab_(with_label)_": {
+                                "Case_3_External_Collab": {
                                     "case": "External Collab",
                                     "actions": {
                                         "Condition_case_3_approval": {
@@ -1153,7 +1169,7 @@
                                                     },
                                                     "type": "Http",
                                                     "inputs": {
-                                                        "body": "grant_type=password&resource=https://graph.microsoft.com&client_id=11cf9fdc-af79-486b-b982-8fb4091a23c8&username=serviceaccount@crayon101.onmicrosoft.com&password=PASSWORD&client_secret=SECRET-cb.u",
+                                                        "body": "grant_type=password&resource=https://graph.microsoft.com&client_id=11cf9fdc-af79-486b-b982-8fb4091a23c8&username=serviceaccount@crayon101.onmicrosoft.com&password=PASSWORD&client_secret=SECRETcb.u",
                                                         "headers": {
                                                             "Content-Type": "application/x-www-form-urlencoded"
                                                         },
@@ -1457,32 +1473,33 @@
                     },
                     "outputs": {}
                 },
-                "parameters": {},
-                "connections": {
-                    "microsoftforms_1": {
-                        "id": "/subscriptions/0000-0000/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/microsoftforms",
-                        "connectionId": "",
-                        "connectionName": ""
-                    },
-                    "office365": {
-                        "id": "/subscriptions/0000-0000/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/office365",
-                        "connectionId": "",
-                        "connectionName": ""
-                    },
-                    "sharepointonline": {
-                        "id": "/subscriptions/0000-0000/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/sharepointonline",
-                        "connectionId": "",
-                        "connectionName": ""
-                    },
-                    "teams": {
-                        "id": "/subscriptions/0000-0000/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/teams",
-                        "connectionId": "",
-                        "connectionName": ""
+                "parameters": {
+                    "$connections": {
+                        "value": {
+                            "microsoftforms_1": {
+                                "connectionId": "[parameters('connections_microsoftforms_1_externalid')]",
+                                "connectionName": "microsoftforms-1",
+                                "id": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/microsoftforms"
+                            },
+                            "office365": {
+                                "connectionId": "[parameters('connections_office365_externalid')]",
+                                "connectionName": "office365",
+                                "id": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/office365"
+                            },
+                            "sharepointonline": {
+                                "connectionId": "[parameters('connections_sharepointonline_externalid')]",
+                                "connectionName": "sharepointonline",
+                                "id": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/sharepointonline"
+                            },
+                            "teams": {
+                                "connectionId": "[parameters('connections_teams_externalid')]",
+                                "connectionName": "teams",
+                                "id": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/providers/Microsoft.Web/locations/switzerlandnorth/managedApis/teams"
+                            }
+                        }
                     }
                 }
             }
         }
-            
-        
     ]
 }
