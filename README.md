@@ -7,6 +7,7 @@ This repo is for the logic app to create a Teams from a Forms.
 # Requirements
 
 Forms
+![alt text](https://github.com/sandro-bachmann/request-a-team/blob/main/forms.png?raw=true)
 
 Graph API Permissions (System Managed Identity) 
 ```python
