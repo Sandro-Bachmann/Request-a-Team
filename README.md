@@ -14,4 +14,3 @@ Code:
 ```
 
 Service Account & Bearer Token
-
