@@ -4,9 +4,6 @@
     "parameters": {
         "logicAppName": {
             "type": "String"
-        },
-        "location": {
-            "type": "String"
         }
     },
     "variables": {},
@@ -15,7 +12,6 @@
             "type": "Microsoft.Logic/workflows",
             "apiVersion": "2019-05-01",
             "name": "[parameters('logicAppName')]",
-            "location": "[parameters('location')]",
             "properties": {
                 "definition": {
                     "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
