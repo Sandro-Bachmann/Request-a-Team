@@ -5,6 +5,22 @@
         "workflows_la_createteamsfromforms_name": {
             "defaultValue": "la-createteamsfromforms",
             "type": "String"
+        },
+        "connections_microsoftforms_1_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/microsoftforms-1",
+            "type": "String"
+        },
+        "connections_office365_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/office365",
+            "type": "String"
+        },
+        "connections_sharepointonline_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/sharepointonline",
+            "type": "String"
+        },
+        "connections_teams_externalid": {
+            "defaultValue": "/subscriptions/e750a043-e649-4daf-8277-843a45f2c44e/resourceGroups/rg-automation-prod-001/providers/Microsoft.Web/connections/teams",
+            "type": "String"
         }
     },
     "variables": {},
